@@ -1,0 +1,10 @@
+# source ~/.bash_completion/alacritty
+
+if [ -f ~/.config/bash/bash_profile.default ]; then
+    source ~/.config/bash/bash_profile.default
+fi
+
+if [ -f ~/.config/bash/bash_profile.user ]; then
+    source ~/.config/bash/bash_profile.user
+fi
+

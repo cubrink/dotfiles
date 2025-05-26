@@ -1,0 +1,12 @@
+set expandtab " Spaces instead of tabs
+set number    " Show line numbers
+syntax on     " Turn on syntax highlighting
+set ignorecase " Ignore case when searching
+set smartcase " Override ignore case if search term contains capital letter
+set incsearch " Show search matches as you type
+set hlsearch " Highlight search results
+set mouse=a " enable mouse in all modes
+set backup " enable backup
+set backupdir=/tmp/vim/backup// " Set backup dir
+set directory=/tmp/vim/swap// " Set swap dir
+

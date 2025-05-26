@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ -f ~/.config/bash/bashrc.default ]; then
+    source ~/.config/bash/bashrc.default
+fi
+
+if [ -f ~/.config/bash/bashrc.user ]; then
+    source ~/.config/bash/bashrc.user
+fi
+

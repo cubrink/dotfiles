@@ -1,0 +1,14 @@
+#!/bin/bash
+
+### General interaction
+alias la='ls -la'
+alias ll='ls -l'
+# alias clip='cat $1 | xclip -selection clipboard'
+alias lesser='less -R'
+alias grep='grep --color=auto'
+
+### Rust
+alias ccc='clear && cargo check'
+alias ccr='clear && cargo run'
+alias ccb='clear && cargo build'
+alias cct='clear && cargo test'

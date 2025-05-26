@@ -1,0 +1,17 @@
+#!/bin/bash
+
+clip() {
+    if [ "$#" -ne 1 ]; then
+        echo "Usage: clip <filename>"
+        echo "Copies the contents of <filename> to the clipboard."
+        return 1
+    fi
+
+    if [ -f "$1" ]; then
+        cat "$1" | xclip -selection clipboard
+    else
+        echo "File not found: $1"
+        return 1
+    fi
+}
+
