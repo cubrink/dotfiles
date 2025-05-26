@@ -1,0 +1,25 @@
+{{- $windows := eq .chezmoi.os "windows" -}}
+{{- $linux := eq .chezmoi.os "linux" -}}
+{{- $macOS := eq .chezmoi.os "darwin" -}}
+{{- $ubuntu := eq (index .chezmoi.osRelease "id") "ubuntu" -}}
+{{- $debian := eq (index .chezmoi.osRelease "id") "debian" -}}
+
+
+sourceDir: "{{- .chezmoi.workingTree -}}/profiles/default"
+
+# Do not show scripts in the output of 'chezmoi diff'
+# diff:
+#   exclude:
+#     - scripts
+
+{{/* 'data' "exports" the variables, so we can use them in templates outside this file */ -}}
+data:
+  is_windows: {{ $windows }}
+  is_linux: {{ $linux }}
+  is_macOS: {{ $macOS }}
+  is_wsl: {{ $wsl }}
+  is_ubuntu: {{ $ubuntu }}
+  is_debian: {{ $debian }}
+  is_apt_distro: {{ or $ubuntu $debian }}
+  is_raspberryPi: {{ and $debian (eq .chezmoi.arch "arm64") }}
+
