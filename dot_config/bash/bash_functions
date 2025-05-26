@@ -1,17 +1,40 @@
 #!/bin/bash
 
 clip() {
-    if [ "$#" -ne 1 ]; then
+    show_help() {
         echo "Usage: clip <filename>"
-        echo "Copies the contents of <filename> to the clipboard."
+        echo "Copies the contents of the specified file to the system clipboard using xclip."
+    }
+
+    # Show help if no args or -h/--help
+    if [[ $# -eq 0 || "$1" == "-h" || "$1" == "--help" ]]; then
+        show_help
+        return
+    fi
+
+    # Check if xclip is installed
+    if ! command -v xclip &>/dev/null; then
+        echo "Error: 'xclip' is not installed. Please install it and try again." >&2
         return 1
     fi
 
-    if [ -f "$1" ]; then
-        cat "$1" | xclip -selection clipboard
-    else
-        echo "File not found: $1"
+    # Check argument count
+    if [[ $# -ne 1 ]]; then
+        echo "Error: Expected exactly one argument." >&2
+        show_help >&2
         return 1
     fi
+
+    # Check if file exists and is readable
+    if [[ ! -f "$1" ]]; then
+        echo "Error: File '$1' does not exist." >&2
+        return 1
+    elif [[ ! -r "$1" ]]; then
+        echo "Error: File '$1' is not readable." >&2
+        return 1
+    fi
+
+    # Pipe contents to clipboard
+    xclip -selection clipboard < "$1"
 }
 

@@ -1,7 +1,13 @@
 #!/bin/bash
 
-if [ -f ~/.config/bash/bashrc.default ]; then
-    source ~/.config/bash/bashrc.default
+# If not running interactively, don't do anything
+case $- in
+    *-*) ;;
+      *) return;;
+esac
+
+if [ -f ~/.config/bash/bashrc.builtin ]; then
+    source ~/.config/bash/bashrc.builtin
 fi
 
 if [ -f ~/.config/bash/bashrc.user ]; then

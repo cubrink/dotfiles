@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ -d ~/.bash_completion.d ]; then
-    for file in ~/.bash_completion.d/*; do
-        [ -r "$file" ] && source "$file"
-    done
-fi
-

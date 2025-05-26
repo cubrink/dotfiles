@@ -1,7 +1,13 @@
-# source ~/.bash_completion/alacritty
+#!/bin/bash
 
-if [ -f ~/.config/bash/bash_profile.default ]; then
-    source ~/.config/bash/bash_profile.default
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+if [ -f ~/.config/bash/bash_profile.builtin ]; then
+    source ~/.config/bash/bash_profile.builtin
 fi
 
 if [ -f ~/.config/bash/bash_profile.user ]; then

@@ -97,8 +97,12 @@ fi
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.config/bash/bash_aliases ]; then
+    source ~/.config/bash/bash_aliases
+fi
+
+if [ -f ~/.config/bash/bash_functions ]; then
+    source ~/.config/bash/bash_functions
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -112,5 +116,9 @@ if ! shopt -oq posix; then
   fi
 fi
 
-. "$HOME/.local/bin/env"
-. "$HOME/.cargo/env"
+if [ -d ~/.config/bash/bash_completion.d ]; then
+    for file in ~/.config/bash/bash_completion.d/*; do
+        [ -r "$file" ] && source "$file"
+    done
+fi
+

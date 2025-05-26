@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# Check if xrandr is installed
+if ! command -v xrandr &> /dev/null; then
+    echo "Error: xrandr is not installed. Please install it to use this script."
+    exit 1
+fi
+
+# Define the built-in display
+INTERNAL="eDP-1"
+
+# Function to get the connected monitors
+get_connected_monitors() {
+    xrandr | grep " connected" | awk '{ print $1 }'
+}
+
+# Function to list current displays with additional info
+list_monitors() {
+    echo -e "Display\tResolution"
+    xrandr | grep " connected" | while read -r line; do
+        monitor=$(echo "$line" | awk '{ print $1 }')
+        resolution=$(xrandr | grep -A1 ^"$monitor" | tail -n 1 | grep -oP '\d+x\d+' | head -n 1)
+        echo -e "$monitor\t$resolution"
+    done
+}
+
+# Function to set single monitor mode
+single_monitor() {
+    local monitor=${1:-$INTERNAL}  # Default to INTERNAL if no monitor is specified
+    if [[ "$connected_monitors" == *"$monitor"* ]]; then
+        xrandr --output "$monitor" --auto --primary
+        for m in $connected_monitors; do
+            if [[ "$m" != "$monitor" ]]; then
+                xrandr --output "$m" --off
+            fi
+        done
+    else
+        echo "$monitor is not connected."
+    fi
+}
+
+# Function to set mirror mode
+mirror_monitors() {
+    if [[ "$connected_monitors" == *"$INTERNAL"* ]]; then
+        for m in $connected_monitors; do
+            if [[ "$m" != "$INTERNAL" ]]; then
+                xrandr --output "$m" --auto --same-as "$INTERNAL"
+            fi
+        done
+    else
+        echo "$INTERNAL is not connected."
+    fi
+}
+
+# Function to set multi-monitor mode
+multi_monitor() {
+    if [[ "$connected_monitors" == *"$INTERNAL"* ]]; then
+        local monitors=(${1//,/ })  # Split the input by commas into an array
+        xrandr --output "$INTERNAL" --auto --primary  # Always enable the internal monitor first
+
+        local first_monitor=true
+        for m in "${monitors[@]}"; do
+            if [[ "$connected_monitors" == *"$m"* ]]; then
+                if $first_monitor; then
+                    # Skip setting left/right for the first monitor
+                    first_monitor=false
+                else
+                    xrandr --output "$m" --auto --right-of "$prev_monitor"
+                fi
+                prev_monitor="$m"
+            else
+                echo "$m is not connected."
+            fi
+        done
+    else
+        echo "$INTERNAL is not connected."
+    fi
+}
+
+# Main script logic
+connected_monitors=$(get_connected_monitors)
+
+# Help function
+show_help() {
+    script_name=$(basename "$0")
+    echo "Usage: $script_name <command> [monitor(s)]"
+    echo ""
+    echo "Commands:"
+    echo "  single [monitor]    Set a single monitor mode."
+    echo "                      Default is the built-in display ($INTERNAL) if no monitor is specified."
+    echo "  mirror              Mirror all connected monitors to the built-in display ($INTERNAL)."
+    echo "  multi               Use specified monitors in an extended display setup."
+    echo "                      Provide a comma-separated list of monitors to specify the order."
+    echo "  list                List currently connected monitors with their resolutions."
+    echo "  help                Print this help text, then exit."
+    echo ""
+    echo "Examples:"
+    echo "  $script_name single           # Use the built-in display"
+    echo "  $script_name single DP-1      # Use DP-1 as the single display"
+    echo "  $script_name mirror           # Mirror displays"
+    echo "  $script_name multi DP-1,DP-2  # Use DP-1 and DP-2 in that order"
+    echo "  $script_name list             # List current displays"
+}
+
+# Check for command
+if [ -z "$1" ]; then
+    show_help
+    exit 1
+fi
+
+case "$1" in
+    single)
+        single_monitor "$2"
+        ;;
+    mirror)
+        mirror_monitors
+        ;;
+    multi)
+        multi_monitor "$2"
+        ;;
+    list)
+        list_monitors
+        ;;
+    *)
+        show_help
+        exit 1
+        ;;
+esac
+
