@@ -195,6 +195,15 @@ bar {
 
 # >>> START CUSTOM SETTINGS
 
-exec --no-startup-id variety
+# exec --no-startup-id variety
+
+mode "exit: [l]ogout, [r]eboot, [s]hutdown, [esc/return] to cancel" {
+  bindsym l exec i3-msg exit
+  bindsym r exec systemctl reboot
+  bindsym s exec systemctl shutdown
+  bindsym Escape mode "default"
+  bindsym Return mode "default"
+}
+bindsym $mod+shift+x mode "exit: [l]ogout, [r]eboot, [s]hutdown, [esc/return] to cancel"
 
 # <<< END CUSTOM SETTINGS
