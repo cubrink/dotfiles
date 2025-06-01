@@ -6,11 +6,14 @@ case $- in
       *) return;;
 esac
 
-if [ -f ~/.config/bash/bashrc.builtin ]; then
-    source ~/.config/bash/bashrc.builtin
+export BASH_USER_CONFIG_PATH="$HOME/.config/bash/bashrc"
+export BASH_SYSTEM_CONFIG_PATH="$HOME/.config/bash/bashrc.builtin"
+
+if [ -f "$BASH_SYSTEM_CONFIG_PATH" ]; then
+    source "$BASH_SYSTEM_CONFIG_PATH"
 fi
 
-if [ -f ~/.config/bash/bashrc.user ]; then
-    source ~/.config/bash/bashrc.user
-fi
 
+if [ -f "$BASH_USER_CONFIG_PATH" ]; then
+    source "$BASH_USER_CONFIG_PATH"
+fi
