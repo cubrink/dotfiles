@@ -31,9 +31,8 @@ sudo apt install \
     httpie \
     gdb \
     valgrind \
-    ccmake \
+    cmake-curses-gui \
     cron \
-    crontab \
     unrar-free
 
     # cargo \
