@@ -1,8 +1,8 @@
 #!/bin/sh
-sudo apt install -y \
+sudo apt install \
     build-essential \
     make \
-    git \ 
+    git \
     # cargo \
     curl \
     vim \
