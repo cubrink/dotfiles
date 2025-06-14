@@ -3,7 +3,6 @@ sudo apt install \
     build-essential \
     make \
     git \
-    # cargo \
     curl \
     vim \
     htop \
@@ -14,7 +13,6 @@ sudo apt install \
     snap \
     flatpak \
     unzip \
-    unrar \
     7zip \
     ffmpeg \
     rsync \
@@ -22,14 +20,11 @@ sudo apt install \
     gnupg \
     tree \
     jq \
-    # tomlq \
-    # yq \
     vlc \
     podman \
     imagemagick \
     pandoc \
     golang \
-	# ruby for gem
     ruby \
     npm \
     graphviz \
@@ -39,3 +34,9 @@ sudo apt install \
     ccmake \
     cron \
     crontab \
+    unrar-free
+
+    # cargo \
+	# ruby for gem
+    # yq \
+    # tomlq \
