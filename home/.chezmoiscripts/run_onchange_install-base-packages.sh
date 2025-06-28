@@ -1,4 +1,8 @@
 #!/bin/sh
+set -e
+
+sudo apt update
+
 sudo apt install \
     build-essential \
     make \
@@ -34,7 +38,10 @@ sudo apt install \
     cmake-curses-gui \
     cron \
     unrar-free \
-    ghostscript
+    ghostscript \
+    shellcheck \
+    strace
+
 
     # cargo \
     # yq \
