@@ -1,8 +1,5 @@
 [general]
-import = [
-	"~/.config/alacritty/themes/themes/github_dark.toml"
-]
+import = [ "~/.config/alacritty/themes/themes/github_dark.toml" ]
 
 [font]
-
-size = 8.0
+size = 8

@@ -13,4 +13,5 @@ alias ccr='clear && cargo run'
 alias ccb='clear && cargo build'
 alias cct='clear && cargo test'
 
-alias resource='source /home/pi/.bashrc'
+alias resource='source ~/.bashrc'
+alias ccce='clear && RUSTFLAGS="-D warnings" cargo test'
