@@ -13,15 +13,15 @@ let g:rustfmt_fail_silently = 0
 
 colorscheme onedark
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#pum#confirm() :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#pum#confirm() :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()

@@ -7,11 +7,11 @@ alias ll='ls -l'
 alias lesser='less -R'
 alias grep='grep --color=auto'
 
+alias resource='source $HOME/.bashrc'
+
 ### Rust
 alias ccc='clear && cargo check'
 alias ccr='clear && cargo run'
 alias ccb='clear && cargo build'
 alias cct='clear && cargo test'
-
-alias resource='source ~/.bashrc'
 alias ccce='clear && RUSTFLAGS="-D warnings" cargo test'
