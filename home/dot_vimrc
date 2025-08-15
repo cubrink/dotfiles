@@ -16,16 +16,43 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| echohl None | echo "Missing plugins - run `:PlugInstall` to install"
 \| endif
 
+
 " Load plug-ins
 call plug#begin('~/.vim/plugged')
 
+"""""""" General
+" Fuzzy file finder - :Lines, :Files, :Buffers, :Rg to search, Ctrl-P for files
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+" Toggle comments with gcc (line) or gc (visual selection)
+Plug 'tpope/vim-commentary'
+
+" Jump to 2-char sequence - s<char><char> (forward), S<char><char> (backward), ; and , to repeat
+Plug 'justinmk/vim-sneak'
+
+" Jump to any visible character - <Leader><Leader>s<char> then type the label shown
+Plug 'easymotion/vim-easymotion'
+
+" Change/delete surroundings - cs"' (change quotes), ds( (delete parens), ysiw" (surround word)
+Plug 'tpope/vim-surround'
+
+" Auto-close brackets, quotes, parens as you type
+Plug 'jiangmiao/auto-pairs'
+
+" File tree explorer - :NERDTreeToggle to open/close, o to open files, m for menu (add/delete files), mapped to <Leader>n
+Plug 'preservim/nerdtree'
+
+"""""""" Languages
+"" Rust
 Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'dense-analysis/ale'
+
+" Themes
 Plug 'joshdick/onedark.vim'
 
 call plug#end()
-
 
 """"""""""""""""""""
 " End plug-ins
@@ -39,6 +66,10 @@ let g:rustfmt_autosave = 1
 let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 
+let g:sneak#label = 1
+
+map <Leader>n :NERDTreeToggle<CR>
+
 colorscheme onedark
 
 """"""""""""""""""""
@@ -50,10 +81,9 @@ colorscheme onedark
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
+      \ pumvisible() ? coc#_select_confirm() :
       \ CheckBackspace() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? "\<C-p>" : "\<C-h>"
 
 function! CheckBackspace() abort
   let col = col('.') - 1
