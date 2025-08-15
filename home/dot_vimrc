@@ -9,6 +9,13 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+
+" Check for missing plugins and show detailed help
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| echohl WarningMsg | echo "Some plugins are missing!"
+  \| echohl None | echo "Missing plugins - run `:PlugInstall` to install"
+\| endif
+
 " Load plug-ins
 call plug#begin('~/.vim/plugged')
 
