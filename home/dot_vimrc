@@ -72,6 +72,17 @@ map <Leader>n :NERDTreeToggle<CR>
 
 colorscheme onedark
 
+" Copy selection to clipboard with Leader (probably \) + y 
+vnoremap <leader>y "+y
+
+function! Paste()
+    let old_paste = &paste
+    set paste
+    normal! "+p
+    let &paste = old_paste
+endfunction
+
+nnoremap <leader>p :call Paste()<CR>
 """"""""""""""""""""
 " End user config
 """"""""""""""""""""
@@ -96,6 +107,21 @@ endfunction
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call ShowDocumentation()<CR>
+" Enable j/k scrolling in CoC popup  
+nnoremap <silent><nowait><expr> j coc#float#has_scroll() ? coc#float#scroll(1) : "j"
+nnoremap <silent><nowait><expr> k coc#float#has_scroll() ? coc#float#scroll(0) : "k"
+" Close CoC popup with Escape only when popup exists
+nnoremap <silent><expr> <Esc> SmartEscape()
+
+function! SmartEscape()
+  if coc#float#has_float()
+    call coc#float#close_all()
+    return ""
+  else
+    return "\<Esc>"
+  endif
+endfunction
+
 
 function! ShowDocumentation()
   if (index(['vim','help'], &filetype) >= 0)
