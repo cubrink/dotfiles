@@ -40,7 +40,8 @@ sudo apt install \
     unrar-free \
     ghostscript \
     shellcheck \
-    strace
+    strace \
+    taskwarrior
 
 
     # cargo \
