@@ -43,6 +43,10 @@ Plug 'jiangmiao/auto-pairs'
 " File tree explorer - :NERDTreeToggle to open/close, o to open files, m for menu (add/delete files), mapped to <Leader>n
 Plug 'preservim/nerdtree'
 
+" Magit, but for vim
+" Use :Magit to activate
+Plug 'jreybert/vimagit'
+
 """""""" Languages
 "" Rust
 Plug 'rust-lang/rust.vim'
