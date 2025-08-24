@@ -41,9 +41,10 @@ sudo apt install \
     ghostscript \
     shellcheck \
     strace \
-    taskwarrior
+    gh
 
-
+    # taskwarrior \
+    # timewarrior \
     # cargo \
     # yq \
     # tomlq \
