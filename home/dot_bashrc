@@ -6,6 +6,12 @@ case $- in
       *) return;;
 esac
 
+# https://specifications.freedesktop.org/basedir-spec/latest/
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_STATE_HOME="$HOME/.local/state"
+
 export BASH_USER_CONFIG_PATH="$HOME/.config/bash/bashrc"
 export BASH_SYSTEM_CONFIG_PATH="$HOME/.config/bash/bashrc.builtin"
 
