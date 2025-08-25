@@ -14,4 +14,7 @@ alias ccc='clear && cargo check'
 alias ccr='clear && cargo run'
 alias ccb='clear && cargo build'
 alias cct='clear && cargo test'
-alias ccce='clear && RUSTFLAGS="-D warnings" cargo test'
+
+# Taskwarrior
+alias tt='taskwarrior-tui'
+
