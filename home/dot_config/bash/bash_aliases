@@ -18,3 +18,6 @@ alias cct='clear && cargo test'
 # Taskwarrior
 alias tt='taskwarrior-tui'
 
+# Chezmoi
+alias gitmoi="chezmoi git"
+alias moi="chezmoi git"
