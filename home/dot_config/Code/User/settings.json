@@ -1,0 +1,187 @@
+{
+    "workbench.colorTheme": "monokai-charcoal",
+    "editor.minimap.enabled": false,
+    "ruff.args": [
+        "\"args\": [\"--config=pyproject.toml\"]"
+    ],
+    "vim.sneak": true,
+    "vim.statusBarColorControl": true,
+    "vim.handleKeys": {
+        "<C-c>": false,
+        "<C-d>": true,
+        "<C-k>": false,
+        "<C-s>": false,
+        "<C-t>": false,
+        "<C-o>": true, 
+        "<C-q>": false,
+        "<C-z>": false,
+    },
+    "workbench.colorCustomizations": {
+        "statusBar.background": "#005f87",
+        "statusBar.noFolderBackground": "#005f87",
+        "statusBar.debuggingBackground": "#005f87",
+        "statusBar.foreground": "#ffffff",
+        "statusBar.debuggingForeground": "#ffffff"
+    },
+    "vim.useSystemClipboard": true,
+    "vim.easymotion": true,
+    "editor.renderWhitespace": "none",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "diffEditor.codeLens": true,
+    "files.exclude": {
+        "**/.git": false
+    },
+    "chat.commandCenter.enabled": false,
+    "telemetry.feedback.enabled": false,
+    "telemetry.telemetryLevel": "off",
+    "accessibility.signals.lineHasBreakpoint": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.chatEditModifiedFile": {
+        "sound": "off"
+    },
+    "accessibility.signals.chatRequestSent": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.chatResponseReceived": {
+        "sound": "off"
+    },
+    "accessibility.signals.clear": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.codeActionApplied": {
+        "sound": "off"
+    },
+    "accessibility.signals.codeActionTriggered": {
+        "sound": "off"
+    },
+    "accessibility.signals.onDebugBreak": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.diffLineDeleted": {
+        "sound": "off"
+    },
+    "accessibility.signals.diffLineInserted": {
+        "sound": "off"
+    },
+    "accessibility.signals.diffLineModified": {
+        "sound": "off"
+    },
+    "accessibility.signals.editsKept": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.positionHasError": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.lineHasError": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.lineHasFoldedArea": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.lineHasInlineSuggestion": {
+        "sound": "off"
+    },
+    "accessibility.signals.noInlayHints": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.notebookCellCompleted": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.notebookCellFailed": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.progress": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.taskCompleted": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.taskFailed": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.terminalCommandFailed": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.terminalCommandSucceeded": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.terminalQuickFix": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.editsUndone": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.voiceRecordingStarted": {
+        "sound": "off"
+    },
+    "accessibility.signals.voiceRecordingStopped": {
+        "sound": "off"
+    },
+    "accessibility.signals.positionHasWarning": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.lineHasWarning": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "accessibility.signals.terminalBell": {
+        "sound": "off",
+        "announcement": "auto"
+    },
+    "editor.accessibilitySupport": "off",
+    "gitlab.duoCodeSuggestions.enabled": false,
+    "gitlab.duoChat.enabled": false,
+    "gitlab.duoCodeSuggestions.enabledSupportedLanguages": {
+        "c": false,
+        "cpp": false,
+        "csharp": false,
+        "go": false,
+        "haml": false,
+        "handlebars": false,
+        "java": false,
+        "javascript": false,
+        "javascriptreact": false,
+        "kotlin": false,
+        "python": false,
+        "php": false,
+        "ruby": false,
+        "rust": false,
+        "scala": false,
+        "shellscript": false,
+        "sql": false,
+        "swift": false,
+        "typescript": false,
+        "typescriptreact": false,
+        "svelte": false,
+        "terraform": false,
+        "terragrunt": false,
+        "vue": false
+    },
+    "gitlab.duo.enabledWithoutGitlabProject": false,
+    "gitlab.keybindingHints.enabled": false,
+    "gitlab.duoCodeSuggestions.openTabsContext": false,
+    "python.experiments.optInto": [],
+    "rust-analyzer.cargo.targetDir": true
+}
