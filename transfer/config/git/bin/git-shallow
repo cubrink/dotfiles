@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Function to delete a git branch using fzf
+git_shallow() {
+    # Check if already inside repo
+    if git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        echo "Error: Cannot clone. Inside a Git repository."
+        return 1
+    fi
+
+    # Get url as first passed in arg
+    local url="$1"
+    
+    # Check if URL was provided
+    if [ -z "$url" ]; then
+        echo "Error: Repository URL required."
+        echo "Usage: git shallow <repository-url> [branch-name]"
+        return 1
+    fi
+    
+    # Build clone command with speed optimizations
+    local clone_opts=(
+        --depth 1                    # Only fetch the latest commit
+        --single-branch              # Only fetch the specified branch
+        --no-tags                    # Don't fetch tags
+        --filter=blob:none           # Blobless clone - fetch tree and commits, but not blobs initially
+    )
+    
+    # Add branch if specified
+    if [ -n "$branch" ]; then
+        clone_opts+=(--branch "$branch")
+    fi
+    
+    # Perform the clone
+    git clone "${clone_opts[@]}" "$url"
+}
+
+# Call the function
+git_shallow "$@"

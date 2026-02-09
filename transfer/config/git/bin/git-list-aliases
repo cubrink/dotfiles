@@ -1,0 +1,15 @@
+#!/bin/bash
+
+git_list_aliases() {
+    {
+        echo "ALIAS|DESCRIPTION"
+        echo "--------------------|------------------------------------------------------------"
+        git config --get-regexp '^alias\.' | sed 's/^alias\.//' | sed 's/ .*//' | while read -r alias_name; do
+            desc=$(git config --get alias-description."$alias_name" || echo "-")
+            echo "$alias_name|$desc"
+        done
+    } | column -t -s '|'
+}
+
+git_list_aliases
+

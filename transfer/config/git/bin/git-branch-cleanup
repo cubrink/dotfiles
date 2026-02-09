@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# Colors using tput
+RED=$(tput setaf 160)
+GREEN=$(tput setaf 2)
+YELLOW=$(tput setaf 3)
+GREY=$(tput setaf 8)
+BOLD=$(tput bold)
+RESET=$(tput sgr0)
+
+# Function to interactively remove branches that can be deleted
+git_branch_cleanup() {
+    trap 'echo ""; tput sgr0; exit 130' INT TERM
+
+    # Check if the current directory is a Git repository
+    if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        echo "${RED}Error: Not inside a Git repository.${RESET}"
+        return 1
+    fi
+
+    echo "Finding branches that can be safely deleted (remote tracking branches are gone)..."
+    echo
+    
+    branches=$(git branch -vv | grep ": gone]" | awk '{print $1}')
+    if [ -z "$branches" ]; then
+        echo "No branches found that can be safely deleted."
+        exit 0
+    fi
+    
+    echo "Found the following branches:"
+    for branch in $branches; do
+        echo "  • ${GREY}$branch${RESET}"
+    done
+    echo ""
+    
+    for branch in $branches; do
+        echo "Branch ${YELLOW}$branch${RESET} appears to have been merged (remote tracking branch is gone)"
+        printf "Delete this branch? [y/N]: "
+        read -r response
+        
+        if [[ "$response" =~ ^[Yy]$ ]]; then
+            printf "[Type ${RED}%s${RESET} to confirm. ${BOLD}This cannot be undone!${RESET}]: ${RED}" "$branch"
+            read -r confirmation
+            printf "${RESET}"
+
+            if [ "$confirmation" = "$branch" ]; then
+                git branch -D "$branch"
+                echo "${BOLD}✓ Deleted branch ${RESET}${YELLOW}$branch${RESET}"
+            else
+                echo "${BOLD}✗ Confirmation did not match. ${RESET} Skipping ${YELLOW}$branch${RESET}${RESET}"
+            fi
+        else
+            echo "✗ ${GREY}Skipping${RESET} ${YELLOW}$branch${RESET}"
+        fi
+        echo ""
+    done
+}
+
+# Call the function
+git_branch_cleanup

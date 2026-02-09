@@ -1,0 +1,28 @@
+[user]
+	name = Curtis Brinker
+
+[alias]
+    alias = "!sh ~/.config/git/bin/git-list-aliases"
+    branchd = "!sh ~/.config/git/bin/git-delete-branch"
+    branch-cleanup = "!sh ~/.config/git/bin/git-branch-cleanup"
+    swap = "!sh ~/.config/git/bin/git-swap-branch"
+    swap-all = "!sh ~/.config/git/bin/git-swap-branch-all"
+    shallow = "!sh ~/.config/git/bin/git-shallow"
+
+[alias-description]
+    alias = "List aliases defined for git"
+    branchd = "Interactively Delete a branch"
+    branch-cleanup = "Interactively look at branches that are safe to remove"
+    swap = "Interactively swaps to a local branch"
+    swap-all = "Interactively swap to any branch"
+    shallow = "Clone a repository with --depth 1"
+
+[commit]
+	template = gitmessage
+	verbose = true
+
+[init]
+	defaultBranch = main
+
+[push]
+	followTags = true

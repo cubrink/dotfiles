@@ -1,0 +1,42 @@
+
+# -----------------------------------------------|---------------------|
+#           Conventional Commit Format           |  COMMIT MAX LENGTH  |
+#                (Content-Focused)               |<- 1st line | body ->|
+# -----------------------------------------------|---------------------|
+# Common commit types for content repositories:                        |
+# publish, draft, revise, edit, archive, design, asset, config         |
+# ---------------------------------------------------------------------|
+# publish  : New content going live                                    |
+# draft    : New content that is not yet ready to be published         |
+# revise   : Substantive content changes, additions, corrections       |
+# edit     : Grammar, typos, clarity, links, formatting fixes          |
+# archive  : Move old content to archives, mark as outdated            |
+# design   : Visual/layout/theme changes, site structure/navigation    |
+# asset    : Add/update media files                                    |
+# config   : Site configuration                                        |
+# ---------------------------------------------------------------------|
+# <type>[(optional scope)]: <description>                              |
+# <blank line>                                                         |
+# [optional body - explain *what* and *why*, not *how*]                |
+# <blank line>                                                         |
+# [optional footer(s) - Issues, references, etc.]                      |
+# ---------------------------------------------------------------------|
+# Example commits:                                                     |
+#   publish: Add post on Docker networking                             |
+#   revise(docker-post): Expand section on bridge networks             |
+#   edit(docker-post): Fix typos and broken links                      |
+#   archive(2020-tutorial): Mark as outdated                           |
+#   design: Update header styling for mobile                           |
+#   asset: Add diagram for network topology                            |
+#   config: Update Jekyll version to 4.3                               |
+# ---------------------------------------------------------------------|
+# Scope examples:                                                      |
+#   - Post title or slug: (docker-post)                                |
+#   - Page name: (about), (contact)                                    |
+#   - Date: (2024-01-15-post-title)                                    |
+#   - Section: (tutorial), (blog)                                      |
+# ---------------------------------------------------------------------|
+# Note: This template is adapted for content-focused repositories      |
+# (blogs, documentation sites, etc.) and does not use semantic         |
+# versioning or breaking change conventions.                           |
+# ---------------------------------------------------------------------|

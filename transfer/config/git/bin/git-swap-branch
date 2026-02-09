@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Function to delete a git branch using fzf
+git_swap_branch() {
+    # Check if the current directory is a Git repository
+    if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
+        echo "Error: Not inside a Git repository."
+        return 1
+    fi
+
+    # Get the current branch name
+    local current_branch=$(git rev-parse --abbrev-ref HEAD)
+
+    # Fetch the list of branches, excluding the current branch
+    local branches=$(git branch --format='%(refname:short)' | awk -v current="$current_branch" '$0 != current')
+
+    # Use fzf to select a branch
+    local branch=$(echo "$branches" | fzf --prompt="[On: $current_branch] Select a branch to switch to: ")
+
+    # Check if a branch was selected
+    if [ -n "$branch" ]; then
+        # Confirm deletion
+        # Delete the selected branch
+        git switch "$branch"
+    else
+        echo "No branch selected."
+    fi
+}
+
+# Call the function
+git_swap_branch
