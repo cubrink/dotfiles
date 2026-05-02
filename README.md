@@ -6,7 +6,7 @@ Configured for use with [chezmoi](https://github.com/twpayne/chezmoi)
 ### Quick install
 
 ```sh
-sh -c "$(wget -fsLS  get.chezmoi.ioi/lb)" -- init --apply cubrink
+sh -c "$(wget -qO-  get.chezmoi.io/lb)" -- init --apply cubrink
 ```
 
 ### Slightly more manual install
