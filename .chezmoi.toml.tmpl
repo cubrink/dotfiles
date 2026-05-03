@@ -1,0 +1,5 @@
+{{- $email := promptStringOnce . "email" "Email address" -}}
+
+[data]
+    email = {{ $email | quote }}
+    is_container = {{ or (stat "/.dockerenv") (env "container" | eq "podman") }}
