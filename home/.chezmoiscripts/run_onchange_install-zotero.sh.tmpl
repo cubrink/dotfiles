@@ -4,7 +4,7 @@
 
 echo "Installing Zotero"
 
-{{ if not .headless -}}
+{{ if and (not .headless) .personal -}}
 have() { command -v "$1" >/dev/null 2>&1; }
 
 if have apt-get || have apt; then
