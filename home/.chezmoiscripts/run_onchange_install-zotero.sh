@@ -2,6 +2,8 @@
 # More info at
 # https://github.com/retorquere/zotero-deb
 
+echo "Installing Zotero"
+
 have() { command -v "$1" >/dev/null 2>&1; }
 
 # Use $SUDO if available,
