@@ -15,7 +15,11 @@ else
 fi
 
 if have apt-get || have apt; then
-	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | $SUDO bash
+	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh > install-zotero.sh
+	sed -i "s/sudo/$SUDO/g" install-zotero.sh
+ 	$SUDO bash install-zotero.sh
+	rm install-zotero.sh
+
 	$SUDO apt update
 	$SUDO apt install zotero
 elif have pacman; then
