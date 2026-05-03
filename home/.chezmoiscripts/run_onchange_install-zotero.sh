@@ -17,7 +17,7 @@ fi
 if have apt-get || have apt; then
 	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sed "s/sudo/$SUDO/g" | $SUDO bash
 	$SUDO apt update
-	$SUDO apt install zotero
+	$SUDO apt install -y zotero
 elif have pacman; then
 	pacman -S --needed --noconfirm zotero
 else
