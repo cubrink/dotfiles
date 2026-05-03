@@ -7,9 +7,9 @@ have() { command -v "$1" >/dev/null 2>&1; }
 # Use $SUDO if available,
 # If running on a container, it probably isn't available
 if [ "$(id -u)" -ne 0 ]; then
-    SUDO=sudo
+    export SUDO=sudo
 else
-    SUDO=
+    export SUDO=
 fi
 
 if have apt-get || have apt; then
