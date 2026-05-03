@@ -4,10 +4,18 @@
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
+# Use $SUDO if available,
+# If running on a container, it probably isn't available
+if [ "$(id -u)" -ne 0 ]; then
+    SUDO=sudo
+else
+    SUDO=
+fi
+
 if have apt-get || have apt; then
-	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
-	sudo apt update
-	sudo apt install zotero
+	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | $SUDO bash
+	$SUDO apt update
+	$SUDO apt install zotero
 elif have pacman; then
 	pacman -S --needed --noconfirm zotero
 else
