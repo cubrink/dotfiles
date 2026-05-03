@@ -1,0 +1,8 @@
+#!/bin/bash
+echo "Installing cargo"
+
+{{ if .headless -}}
+wget -qO- https://sh.rustup.rs | sh -s -- --no-modify-path -y
+{{- else -}}
+wget -qO- https://sh.rustup.rs | sh -s -- --no-modify-path
+{{- end }}
