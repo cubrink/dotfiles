@@ -3,10 +3,18 @@ set -e
 
 have() { command -v "$1" >/dev/null 2>&1; }
 
-if have apt-get || have apt; then
-    sudo apt update
+# Use sudo if available,
+# If running on a container, it probably isn't available
+if [ "$(id -u)" -ne 0 ]; then
+    SUDO=sudo
+else
+    SUDO=
+fi
 
-    sudo apt install -y \
+if have apt-get || have apt; then
+    $SUDO apt update
+
+    $SUDO apt install -y \
         build-essential \
         make \
         git \
@@ -16,7 +24,7 @@ if have apt-get || have apt; then
         wget \
         tmux \
         cmake \
-        sudo \
+        $SUDO \
         snap \
         flatpak \
         unzip \
@@ -48,10 +56,10 @@ if have apt-get || have apt; then
 
 elif have pacman; then
     # Update DB and system
-    sudo pacman -Sy --noconfirm
-    sudo yay -Sy --noconfirm
+    $SUDO pacman -Sy --noconfirm
+    $SUDO yay -Sy --noconfirm
 
-    sudo pacman -S --needed --noconfirm \
+    $SUDO pacman -S --needed --noconfirm \
         base-devel \
         make \
         git \
@@ -61,7 +69,7 @@ elif have pacman; then
         wget \
         tmux \
         cmake \
-        sudo \
+        $SUDO \
         flatpak \
         unzip \
         p7zip \
@@ -91,7 +99,7 @@ elif have pacman; then
         github-cli \
 
         # snapd \
-    sudo yay -S --needed --noconfirm \
+    $SUDO yay -S --needed --noconfirm \
     	strace
 
 else

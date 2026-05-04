@@ -2,15 +2,22 @@
 # More info at
 # https://github.com/retorquere/zotero-deb
 
+echo "Installing Zotero"
+
+{{ if and (not .headless) .personal -}}
 have() { command -v "$1" >/dev/null 2>&1; }
 
 if have apt-get || have apt; then
 	wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | sudo bash
 	sudo apt update
-	sudo apt install zotero
+	sudo apt install -y zotero
 elif have pacman; then
 	pacman -S --needed --noconfirm zotero
 else
     echo "No supported package manager found (apt or pacman). Aborting." >&2
     exit 2
 fi
+
+{{- else -}}
+echo "Configuring headless machine - skipping Zotero"
+{{- end }}

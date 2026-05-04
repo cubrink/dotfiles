@@ -1,0 +1,51 @@
+{{/* boolean feature tags */}}
+{{- $ephemeral := false -}}
+{{- $headless := false -}}
+{{- $personal := false -}}
+{{- $work := false -}}
+{{- "" -}}
+
+{{- $osID := .chezmoi.os -}}
+{{- if (and (eq .chezmoi.os "linux") (hasKey .chezmoi.osRelease "id")) -}}
+{{-   $osID = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id -}}
+{{- end -}}
+
+{{/* detect containers and ephemeral environments */}}
+{{- if or (env "CODESPACES") (env "REMOTE_CONTAINERS_IPC") (env "DEVCONTAINER") (eq .chezmoi.username "root" "ubuntu" "vagrant" "vscode") -}}
+{{-   $ephemeral = true -}}
+{{-   $headless = true -}}
+{{- end -}}
+
+{{- $hostname := .chezmoi.hostname -}}
+{{- if eq .chezmoi.os "darwin" -}}
+{{-   $hostname = output "scutil" "--get" "LocalHostName" | trim -}}
+{{- end -}}
+
+{{- if not $ephemeral -}}
+{{-   if eq $hostname "my-macbook" -}}{{/* TODO: fill in */}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "my-desktop" -}}{{/* TODO: fill in */}}
+{{-     $personal = true -}}
+{{-   else if eq $hostname "work-machine" -}}{{/* TODO: fill in */}}
+{{-     $work = true -}}
+{{-   else if stdinIsATTY -}}
+{{-     $headless = promptBoolOnce . "headless" "headless" -}}
+{{-     $ephemeral = promptBoolOnce . "ephemeral" "ephemeral" -}}
+{{-   else -}}
+{{-     $ephemeral = true -}}
+{{-     $headless = true -}}
+{{-   end -}}
+{{- end -}}
+
+{{- $email := "curtisbrnkr@gmail.com" -}}
+{{- if $work -}}
+{{-   $email = "work@email.com" -}}
+{{- end -}}
+
+[data]
+    ephemeral = {{ $ephemeral }}
+    headless = {{ $headless }}
+    personal = {{ $personal }}
+    work = {{ $work }}
+    hostname = {{ $hostname | quote }}
+    osid = {{ $osID | quote }}

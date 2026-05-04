@@ -67,7 +67,7 @@ call plug#end()
 " Begin user config
 """"""""""""""""""""
 " Color scheme
-colorscheme onedark
+silent! colorscheme onedark
 
 " General
 set nu
